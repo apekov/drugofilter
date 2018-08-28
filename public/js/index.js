@@ -60,9 +60,12 @@ function basicActions(){
   buttonSave.addEventListener('click', () => {
     let no_sort_save = JSON.stringify(no_sort);
     let sort_save = JSON.stringify(sort);
-
-    localStorage.setItem('no_sort', no_sort_save);
-    localStorage.setItem('sort', sort_save);
+    let isSave = confirm("Сохранить эти таблицы?");
+    
+    if (isSave) {
+      localStorage.setItem('no_sort', no_sort_save);
+      localStorage.setItem('sort', sort_save);
+    }
   });
 
   let currentDrag;
@@ -71,7 +74,7 @@ function basicActions(){
       let zone = getCurrentZone(e.target);
 
       if (zone) {
-          currentDrag = e.target ;
+          currentDrag = { startZone: zone, node: e.target };
       }
   });
 
@@ -81,20 +84,39 @@ function basicActions(){
 
   document.addEventListener('drop', (e) => {
       if (currentDrag) {
+        // console.log(currentDrag);
           let zone = getCurrentZone(e.target);
-          if(zone.classList.contains('list_sort')){
-            let massiv = no_sort.items;
-            let id = currentDrag.firstElementChild.textContent;
-            for (let i = 0; i < massiv.length; i++) {
-              if (massiv[i].id == id) {
-                  sort.items.push((massiv[i]));
-                  no_sort.items.remove(massiv[i]);
+
+          console.log(e.target);
+          if ((currentDrag.startZone != zone) && zone.classList.contains('list')) {
+              if(currentDrag.startZone.classList.contains('list_no_sort')) {
+                let massiv = no_sort.items;
+                let id = currentDrag.node.firstElementChild.textContent;
+                for (let i = 0; i < massiv.length; i++) {
+                  if (massiv[i].id == id) {
+                      sort.items.push((massiv[i]));
+                      no_sort.items.remove(massiv[i]);
+                  }
+                }
+              } else if (currentDrag.startZone.classList.contains('list_sort')) {
+                let massiv = sort.items;
+                let id = currentDrag.node.firstElementChild.textContent;
+                for (let i = 0; i < massiv.length; i++) {
+                  if (massiv[i].id == id) {
+                      no_sort.items.push((massiv[i]));
+                      sort.items.remove(massiv[i]);
+                  }
+                }
+              }
+              reloadListHtml(no_sort, sort);
+              if(filter_no_sort.value){
+                filtred(filter_no_sort.value, no_sort.items, '.list_no_sort');
+              } else if(filter_sort.value) {
+                filtred(filter_sort.value, sort.items, '.list_sort');
               }
             }
-            reloadListHtml(no_sort, sort);
           }
           currentDrag = null;
-      }
   });
 
   function getCurrentZone(from) {

@@ -95,6 +95,9 @@ html, body {
 .list.list_sort{
   min-height: 500px;
 }
+.list.list_no_sort{
+  min-height: 500px;
+}
 .list_friend .item img.add{
   float: right;
   padding-top: 16px;
