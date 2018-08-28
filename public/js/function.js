@@ -59,7 +59,7 @@ function reloadListHtml(no_sort, sort){
 
 // sort array
 
-function motionArrayElement(target, control, deleteArray, addArray) {
+function motionArrayElement(target, control = null, deleteArray, addArray) {
   for (let i = 0; i < control.length; i++) {
     if (target === control[i]) {
       let id = target.parentNode.firstElementChild.textContent;
@@ -77,3 +77,24 @@ function motionArrayElement(target, control, deleteArray, addArray) {
 
 
 // basic actions
+
+
+function isMatching(full, chunk) {
+    if (full.toLocaleUpperCase().indexOf(chunk.toLocaleUpperCase()) != -1) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
+function filtred(value, list, classFilter){
+  let massiv = {};
+  massiv.items = [];
+  for (var i = 0; i < list.length; i++) {
+    if (isMatching(list[i].first_name, value) || isMatching(list[i].last_name, value)) {
+      massiv.items.push(list[i]);
+      renderHtml('#no_sort', classFilter, massiv);
+    }
+  }
+}
