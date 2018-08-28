@@ -4,8 +4,6 @@ const saveButton = document.querySelector('#save');
 let no_sort = localStorage.getItem("no_sort");
 let sort = localStorage.getItem("sort");
 
-// console.log(localStorage);
-//
 if(!no_sort && !sort) {
   auth()
     .then(() => { return callAPI('friends.get', {fields: 'photo_100'});
@@ -20,6 +18,7 @@ if(!no_sort && !sort) {
         localStorage.setItem('sort', JSON.stringify(obj_sort));
     })
 } else {
+
   basicActions();
 }
 
@@ -53,5 +52,7 @@ function basicActions(){
 
     localStorage.setItem('no_sort', no_sort_save);
     localStorage.setItem('sort', sort_save);
-  })
+  });
+
+
 }

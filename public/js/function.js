@@ -33,7 +33,6 @@ function callAPI(method, params) {
 
 
 // create list
-
 function renderHtml(templateName, list, obj) {
   let template = document.querySelector(templateName).textContent;
   let render = Handlebars.compile(template);

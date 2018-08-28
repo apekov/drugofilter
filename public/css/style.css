@@ -92,7 +92,9 @@ html, body {
   border-radius: 50%;
   max-width: 50px;
 }
-
+.list.list_sort{
+  min-height: 500px;
+}
 .list_friend .item img.add{
   float: right;
   padding-top: 16px;

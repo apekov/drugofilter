@@ -73,7 +73,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script id="no_sort" type="text/x-handlebars-template">
       {{#each items}}
-      <div class="item">
+      <div class="item" draggable="true">
         <div class="id" style="display: none">{{this.id}}</div>
         <img src="{{photo_100}}" alt="">
         <span class="desc"><span class="firstName">{{first_name}}</span> <span class="lastName">{{last_name}}</span></span>
@@ -83,7 +83,7 @@
   </script>
   <script id="sort" type="text/x-handlebars-template">
       {{#each items}}
-      <div class="item">
+      <div class="item" draggable="true">
         <div class="id" style="display: none">{{this.id}}</div>
         <img src="{{photo_100}}" alt="">
         <span class="desc"><span class="firstName">{{first_name}}</span> <span class="lastName">{{last_name}}</span></span>
