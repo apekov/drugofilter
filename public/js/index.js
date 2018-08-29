@@ -54,6 +54,11 @@ function basicActions(){
 
 
       reloadListHtml(no_sort, sort);
+      if(filter_no_sort.value){
+        filtred(filter_no_sort.value, no_sort.items, '.list_no_sort');
+      } else if(filter_sort.value) {
+        filtred(filter_sort.value, sort.items, '.list_sort');
+      }
   });
   let buttonSave = document.querySelector('#save');
 
@@ -61,7 +66,7 @@ function basicActions(){
     let no_sort_save = JSON.stringify(no_sort);
     let sort_save = JSON.stringify(sort);
     let isSave = confirm("Сохранить эти таблицы?");
-    
+
     if (isSave) {
       localStorage.setItem('no_sort', no_sort_save);
       localStorage.setItem('sort', sort_save);
